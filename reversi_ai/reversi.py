@@ -33,7 +33,7 @@ def request_util(request):
     result = 10 * next_move[0] + next_move[1]
     return HttpResponse(result)
 
-depth = 8  # reassigned in inner function
+depth = 7  # reassigned in inner function
 player = 'O'
 
 if player == 'X':
@@ -126,7 +126,7 @@ def evaluate(board):
 
 def helper(game_board):
     global depth
-    depth = 7
+    depth = 6
     global next_move
     next_move = ()
     alpha_beta_pruning(game_board, player, opponent, 0, 'maximizer', -sys.maxsize, sys.maxsize, sys.maxsize, 0)

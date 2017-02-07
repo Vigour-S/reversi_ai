@@ -12,6 +12,7 @@ var reversi = {
     },
     turn: null,
     computerRunning : false,
+    info : null,
     
     init: function(selector) {
         
@@ -100,6 +101,15 @@ var reversi = {
         this.grid[row][col].elem.style.backgroundColor = state.color;
     },
     
+    reset: function() {
+
+        // clear items
+        this.clear();
+        
+        // reinit game
+        this.initGame();
+    },
+    
     prepareGrid: function() {
         
         // create table structure for grid
@@ -161,6 +171,30 @@ var reversi = {
         
         // append table
         this.father.appendChild(table);
+        
+        // prepare restart button and info board
+        var bottomBoard = document.createElement('div'),
+        restart = document.createElement('span'),
+        infoBoard = document.createElement('span');
+        
+        restart.className = 'bottom-node restart';
+        infoBoard.className = 'bottom-node';
+        
+        var that = this;
+        restart.onclick = function(event) {
+            // reset the game
+            that.reset();
+        };
+        restart.innerHTML = "New Game";
+        infoBoard.innerHTML = "Your Turn"
+        
+        bottomBoard.appendChild(restart);
+        bottomBoard.appendChild(infoBoard);
+        
+        this.father.appendChild(bottomBoard);
+        
+        this.info = infoBoard;
+        
     },
     
     recalcuteScore: function()  {
@@ -303,6 +337,7 @@ var reversi = {
                         self.endGame();
                     } else {
                         self.computerRunning = true;
+                        self.info.innerHTML = "Thinking";
                         self.computerTurn();
                     }
                 }
@@ -341,15 +376,6 @@ var reversi = {
                 this.setItemState(i, j, this.states.blank);
             }
         }
-    },
-    
-    reset: function() {
-
-        // clear items
-        this.clear();
-        
-        // reinit game
-        this.initGame();
     },
     
     checkEnd: function(lastMove) {
@@ -479,10 +505,12 @@ var reversi = {
                     that.endGame();
                 }
             }
+            that.info.innerHTML = "Your Turn";
             that.computerRunning = false;
             
         }).fail(function(x) {
             // todo
+            that.info.innerHTML = "Internet Unstable";
             that.computerRunning = false;
         })
     }
