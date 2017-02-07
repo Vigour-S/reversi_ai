@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/static/css/reset.css">
+        <link rel="stylesheet" href="/static/css/reversi.css">
+        <title>Reversi</title>
+    </head>
+    <body>
+        <div id = "container">
+            <header><h1>Reversi</h1></header>
+        <div id = "body">
+            <div id="playground"></div>
+        </div>
+        <footer>
+            <h2>What is reversi game?</h2>
+            <p>
+                Reversi (A.K.A Othello) is a strategy board game for two players, played on an 8×8 uncheckered board.
+                During a play, any disks of the opponent's color that are in a straight line and bounded by the disk just placed and another disk of the current player's color are turned over to the current player's color.
+                The object of the game is to have the majority of disks turned to display your color when the last playable empty square is filled. For more info, refer to <a href="https://en.wikipedia.org/wiki/Reversi" target="_blank">wiki</a>.
+            </p>
+            
+            <h2>How this was implemented?</h2>
+            <p>
+                This game was based on minimax and alpha-beta-pruning algorithm, implemented with Javascript and Python.
+                It searches every possible square you tent to place a disk. The search depth actually affects the difficulty of the game. At the bottom of the search tree, we use a evalution function to find the best result we can get. However, right now this AI does not have too much self-learning ability. I am trying to make it smarter.
+                For more implementation details, refer to <a></a>.
+            </p>
+        </footer>
+        </div>
+    </body>
+    <script src="/static/js/reversi.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+    <script> 
+        window.onload = function() {
+            
+            reversi.init('playground');
+        };
+    </script>
+</html>
