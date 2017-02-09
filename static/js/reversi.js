@@ -495,7 +495,7 @@ var reversi = {
         }
         
         $.ajax({
-            url: "http://104.32.167.37:8000/reversi",
+            url: "http://sample-env.zesvu2ttmu.us-west-1.elasticbeanstalk.com/reversi",
             type: "GET",
             data: {'myArray' : board},
             success: function(data) {

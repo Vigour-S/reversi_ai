@@ -25,7 +25,7 @@ SECRET_KEY = 'ab^e-7tmn8gzwps#@j3)$)&ux^_@-$kl192sri-nx2ta==&en*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.14', '104.32.167.37']
+ALLOWED_HOSTS = ['192.168.0.14', '104.32.167.37', 'http://sample-env.zesvu2ttmu.us-west-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Pacific'
 
 USE_I18N = True
 
@@ -121,4 +121,4 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = ( os.path.join('static'), )
+STATICFILES_DIRS = (os.path.join('static'), )
