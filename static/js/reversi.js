@@ -47,6 +47,9 @@ var reversi = {
         
         // set initial score
         this.setScore(2, 2);
+        
+        //set possible squares
+        this.findPossibleSquares();
     },
     
     passTurn: function() {
@@ -70,7 +73,8 @@ var reversi = {
         
         return {
             'state': this.states.blank,
-            'elem': elem
+            'elem': elem.firstChild,
+            'td' : elem
         };
     },
     
@@ -106,6 +110,9 @@ var reversi = {
         // clear items
         this.clear();
         
+        // clear marked squares
+        this.clearMarkedSquares();
+        
         // reinit game
         this.initGame();
     },
@@ -138,7 +145,8 @@ var reversi = {
                 this.bindMove(td, i, j);
                 
                 // we are also storing html element for better manipulation later
-                this.grid[i][j] = this.initItemState(td.appendChild(document.createElement('span')));
+                td.appendChild(document.createElement('span'))
+                this.grid[i][j] = this.initItemState(td);
             }
         }
 
@@ -316,7 +324,10 @@ var reversi = {
                 
                 // if have a valid move
                 if (self.isValidMove(row, col)) {
-
+                    
+                    //clear marked squares
+                    self.clearMarkedSquares();
+                    
                     // make the move
                     self.move(row, col);
                     
@@ -484,7 +495,7 @@ var reversi = {
         }
         
         $.ajax({
-            url: "http://127.0.0.1:8000/reversi",
+            url: "http://104.32.167.37:8000/reversi",
             type: "GET",
             data: {'myArray' : board},
             success: function(data) {
@@ -506,6 +517,7 @@ var reversi = {
                 }
             }
             that.info.innerHTML = "Your Turn";
+            that.findPossibleSquares();
             that.computerRunning = false;
             
         }).fail(function(x) {
@@ -513,5 +525,25 @@ var reversi = {
             that.info.innerHTML = "Internet Unstable";
             that.computerRunning = false;
         })
-    }
+    },
+    
+    findPossibleSquares : function() {
+        for (var i = 1; i <= this.rows; i++) {
+            for (var j = 1; j <= this.cols; j++) {
+                if (this.isValidMove(i, j)) {
+                    this.grid[i][j].td.style.backgroundColor = '#EEEEEE';
+                }
+            }
+        }
+    },
+    
+    clearMarkedSquares : function() {
+        for (var i = 1; i <= this.rows; i++) {
+            for (var j = 1; j <= this.cols; j++) {
+                if (this.grid[i][j].td.style.backgroundColor == 'rgb(238, 238, 238)') {
+                    this.grid[i][j].td.style.backgroundColor = '#DDDDDD';
+                }
+            }
+        }
+    }   
 };

@@ -18,7 +18,7 @@ from django.contrib import admin
 from reversi_ai import reversi
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^homepage', reversi.index),
     url(r'^reversi$', reversi.request_util),
-    url(r'^homepage', reversi.index)
+
 ]

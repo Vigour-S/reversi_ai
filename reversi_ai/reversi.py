@@ -126,7 +126,7 @@ def evaluate(board):
 
 def helper(game_board):
     global depth
-    depth = 6
+    depth = 5
     global next_move
     next_move = ()
     alpha_beta_pruning(game_board, player, opponent, 0, 'maximizer', -sys.maxsize, sys.maxsize, sys.maxsize, 0)
